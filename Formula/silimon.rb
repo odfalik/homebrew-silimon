@@ -1,35 +1,47 @@
 # Homebrew formula for Silimon
-# Auto-updated by GitHub Actions
+# Auto-updated by GitHub Actions on new releases
 
 class Silimon < Formula
   desc "Apple Silicon performance monitor for your menu bar"
   homepage "https://github.com/odfalik/silimon"
-  url "https://github.com/odfalik/silimon/releases/download/v0.4.1/silimon-0.4.1-arm64.tar.gz"
-  sha256 "e399e98d229f523dc07987cbcb007b8f8405d6e9e9a724e788fa7a49e65e60da"
+  url "https://github.com/odfalik/silimon/archive/refs/tags/v0.6.0.tar.gz"
+  sha256 "de1814c52210fb94aa7da3816072812635da0b83d4039eaa29659eb16fc3da6b"
   license "MIT"
+  head "https://github.com/odfalik/silimon.git", branch: "main"
 
-  depends_on :macos
   depends_on arch: :arm64
+  depends_on macos: :ventura
+  depends_on xcode: ["14.0", :build]
 
   def install
-    bin.install "silimon"
-    (pkgshare/"scripts").install "Scripts/setup-sudo.sh"
-    (pkgshare/"scripts").install "Scripts/uninstall.sh"
+    system "swift", "build", "-c", "release", "--disable-sandbox"
+    bin.install ".build/release/silimon"
   end
 
   def caveats
     <<~EOS
       Silimon monitors Apple Silicon performance metrics in your menu bar.
 
-      To start silimon:
+      Features:
+        - Real-time power consumption (CPU, GPU, ANE)
+        - CPU cluster frequencies (E-cores vs P-cores)
+        - Memory usage and pressure
+        - GPU utilization
+        - Network throughput
+        - Battery status
+
+      No sudo required! Start silimon with:
         silimon
 
-      First run may require: sudo silimon
-      Or run: $(brew --prefix)/share/silimon/scripts/setup-sudo.sh
+      If metrics aren't working, open Settings and click "Diagnose"
+      to run system diagnostics.
+
+      To uninstall:
+        brew uninstall silimon
     EOS
   end
 
   test do
-    assert_match "silimon", shell_output("#{bin}/silimon --help 2>&1", 0)
+    assert_match "silimon", shell_output("#{bin}/silimon --version")
   end
 end
