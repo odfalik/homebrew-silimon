@@ -9,7 +9,7 @@ jobs:
   count:
     runs-on: ubuntu-latest
     steps:
-      - uses: MShawon/github-clone-count-badge@main
+      - uses: MShawon/github-clone-count-badge@master
         env:
           GITHUB_TOKEN: ${{ secrets.SECRET_TOKEN }}
           GIST_ID: ${{ secrets.GIST_ID }}
