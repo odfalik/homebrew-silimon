@@ -4,19 +4,20 @@
 class Silimon < Formula
   desc "Apple Silicon performance monitor for your menu bar"
   homepage "https://github.com/odfalik/silimon"
-  url "https://github.com/odfalik/silimon/archive/refs/tags/v0.3.0.tar.gz"
-  sha256 "4bf581be060b99582c7560e6f1e3f6fcd765efe172bb18495ac54d23c1149808"
+  url "https://github.com/odfalik/silimon/releases/download/v0.4.0/silimon-0.4.0-arm64.tar.gz"
+  sha256 "edfb9585b6b8b410e8b80a5cd6d152a75562368f5e31b4e656361b86408a1557"
   license "MIT"
-  head "https://github.com/odfalik/silimon.git", branch: "main"
 
   depends_on :macos
-  depends_on xcode: ["14.0", :build]
+  depends_on arch: :arm64
 
   def install
-    system "swift", "build", "-c", "release", "--disable-sandbox"
-    bin.install ".build/release/silimon"
-    (pkgshare/"scripts").install "Scripts/setup-sudo.sh"
-    (pkgshare/"scripts").install "Scripts/uninstall.sh"
+    # The tarball extracts to silimon-release/
+    cd "silimon-release" do
+      bin.install "silimon"
+      (pkgshare/"scripts").install "Scripts/setup-sudo.sh"
+      (pkgshare/"scripts").install "Scripts/uninstall.sh"
+    end
   end
 
   def caveats
