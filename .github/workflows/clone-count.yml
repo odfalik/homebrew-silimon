@@ -1,0 +1,15 @@
+name: GitHub Clone Count
+
+on:
+  schedule:
+    - cron: "0 0 * * *"  # Daily at midnight UTC
+  workflow_dispatch:
+
+jobs:
+  count:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: MShawon/github-clone-count-badge@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.SECRET_TOKEN }}
+          GIST_ID: ${{ secrets.GIST_ID }}
