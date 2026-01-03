@@ -4,18 +4,15 @@
 class Silimon < Formula
   desc "Apple Silicon performance monitor for your menu bar"
   homepage "https://github.com/odfalik/silimon"
-  url "https://github.com/odfalik/silimon/archive/refs/tags/v0.6.0.tar.gz"
-  sha256 "de1814c52210fb94aa7da3816072812635da0b83d4039eaa29659eb16fc3da6b"
+  url "https://github.com/odfalik/silimon/releases/download/v0.6.0/silimon-0.6.0-arm64.tar.gz"
+  sha256 "ef95fa3e8d29ca6b53f9f4d6595ec04dfe97775e6a702deb7faa250f1a1372ea"
   license "MIT"
-  head "https://github.com/odfalik/silimon.git", branch: "main"
 
   depends_on arch: :arm64
   depends_on macos: :ventura
-  depends_on xcode: ["14.0", :build]
 
   def install
-    system "swift", "build", "-c", "release", "--disable-sandbox"
-    bin.install ".build/release/silimon"
+    bin.install "silimon"
   end
 
   def caveats
@@ -35,9 +32,6 @@ class Silimon < Formula
 
       If metrics aren't working, open Settings and click "Diagnose"
       to run system diagnostics.
-
-      To uninstall:
-        brew uninstall silimon
     EOS
   end
 
