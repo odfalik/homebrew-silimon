@@ -4,8 +4,8 @@
 class Silimon < Formula
   desc "Apple Silicon performance monitor for your menu bar"
   homepage "https://github.com/odfalik/silimon"
-  url "https://github.com/odfalik/silimon/releases/download/v0.6.0/silimon-0.6.0-arm64.tar.gz"
-  sha256 "ef95fa3e8d29ca6b53f9f4d6595ec04dfe97775e6a702deb7faa250f1a1372ea"
+  url "https://github.com/odfalik/silimon/releases/download/v0.7.0/silimon-0.7.0-arm64.tar.gz"
+  sha256 "958322cc36b12f60782870ee8778e51d0382108ea9eb475ec4a150bd662554cf"
   license "MIT"
 
   depends_on arch: :arm64
@@ -30,7 +30,7 @@ class Silimon < Formula
       No sudo required! Start silimon with:
         silimon
 
-      If metrics aren't working, open Settings and click "Diagnose"
+      If metrics are not working, open Settings and click "Diagnose"
       to run system diagnostics.
     EOS
   end
