@@ -12,12 +12,9 @@ class Silimon < Formula
   depends_on arch: :arm64
 
   def install
-    # The tarball extracts to silimon-release/
-    cd "silimon-release" do
-      bin.install "silimon"
-      (pkgshare/"scripts").install "Scripts/setup-sudo.sh"
-      (pkgshare/"scripts").install "Scripts/uninstall.sh"
-    end
+    bin.install "silimon"
+    (pkgshare/"scripts").install "Scripts/setup-sudo.sh"
+    (pkgshare/"scripts").install "Scripts/uninstall.sh"
   end
 
   def caveats
