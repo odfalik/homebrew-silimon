@@ -4,9 +4,9 @@
 class Silimon < Formula
   desc "Apple Silicon performance monitor for your menu bar"
   homepage "https://github.com/odfalik/silimon"
-  url "https://github.com/odfalik/silimon/releases/download/v0.8.7/silimon-0.8.7-arm64.tar.gz"
-  version "0.8.7"
-  sha256 "2d9d27f6c4bcde40707e13d3a60c56563ad6d0c3afebf4c9f7999184fa23ed46"
+  url "https://github.com/odfalik/silimon/releases/download/v0.8.8/silimon-0.8.8-arm64.tar.gz"
+  version "0.8.8"
+  sha256 "112a1667f7a5b50eb1811073cdb9b99c84cfa6951f5e482f569696196ec96e7f"
   license "MIT"
 
   depends_on arch: :arm64
