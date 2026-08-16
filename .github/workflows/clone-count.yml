@@ -1,4 +1,4 @@
-name: GitHub Clone Count
+name: Install Count
 
 on:
   schedule:
@@ -14,14 +14,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Fetch the 14-day traffic window
+      - name: Recompute the install count from release downloads
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh api "repos/${{ github.repository }}/traffic/clones" > clone_latest.json
-          python3 -c "import json;d=json.load(open('clone_latest.json'));print('window:',d['count'],'clones /',d['uniques'],'uniques')"
-
-      - name: Merge into the cumulative history
+          SOURCE_REPO: odfalik/silimon
         run: python3 .github/clone-count/merge.py
 
       - name: Commit if the count moved
@@ -29,9 +25,9 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           if git diff --quiet -- .github/clone-count/clone.json; then
-            echo "No change in clone count; nothing to commit."
+            echo "No change; nothing to commit."
             exit 0
           fi
           git add .github/clone-count/clone.json
-          git commit -m "chore: update clone count [skip ci]"
+          git commit -m "chore: update install count [skip ci]"
           git push
